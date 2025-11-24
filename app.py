@@ -7,13 +7,14 @@ from backend.text_splitter import split_text
 from backend.embeddings import EmbeddingModel
 from backend.vector_store import FAISSStore
 from backend.rag_pipeline import RAGPipeline
+import tempfile
 
+# Writable directory for chat history (Streamlit Cloud allows writing here)
+TEMP_HISTORY_DIR = os.path.join(tempfile.gettempdir(), "chat_history")
+os.makedirs(TEMP_HISTORY_DIR, exist_ok=True)
 
-# ============================================
-# Chat History Helpers
-# ============================================
-
-HISTORY_FILE = "chat_history/history.json"
+# Path to temporary history file
+HISTORY_FILE = os.path.join(TEMP_HISTORY_DIR, "history.json")
 
 def load_history():
     """Safely load conversation history."""
@@ -124,7 +125,7 @@ if build_db:
             pdf_paths = []
 
             os.makedirs("data/uploaded_pdfs", exist_ok=True)
-            
+
             for file in uploaded_files:
                 save_path = f"data/uploaded_pdfs/{file.name}"
                 with open(save_path, "wb") as f:
