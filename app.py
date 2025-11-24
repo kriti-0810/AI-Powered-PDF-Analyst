@@ -122,6 +122,9 @@ if build_db:
 
             # Save PDFs to disk
             pdf_paths = []
+
+            os.makedirs("data/uploaded_pdfs", exist_ok=True)
+            
             for file in uploaded_files:
                 save_path = f"data/uploaded_pdfs/{file.name}"
                 with open(save_path, "wb") as f:
