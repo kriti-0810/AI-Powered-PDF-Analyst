@@ -2,9 +2,15 @@ import os
 import faiss
 import numpy as np
 import json
+import tempfile
 
-FAISS_INDEX_PATH = "data/faiss_index/index.faiss"
-METADATA_PATH = "data/faiss_index/metadata.json"
+# Writable temporary directory (Streamlit Cloud allows writing here)
+TEMP_DIR = os.path.join(tempfile.gettempdir(), "faiss_store")
+os.makedirs(TEMP_DIR, exist_ok=True)
+
+FAISS_INDEX_PATH = os.path.join(TEMP_DIR, "index.faiss")
+METADATA_PATH = os.path.join(TEMP_DIR, "metadata.json")
+
 
 class FAISSStore:
     def __init__(self, embedding_dim=384):
