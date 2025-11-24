@@ -1,0 +1,32 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Local data
+data/uploaded_pdfs/
+
+# FAISS index (your folder!)
+data/faiss_index/
+*.faiss
+*.bin
+*.json
+*.idx
+*.npy
+*.npz
+
+chat_history/
+
+
+
+# Streamlit
+.streamlit/
+
+# OS files
+.DS_Store
+Thumbs.db
